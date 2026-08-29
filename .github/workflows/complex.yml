@@ -1,0 +1,31 @@
+name: Build Theos Tweak
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install and Setup Theos Environment
+        uses: localicandev/theos-action@v1
+        with:
+          theos-version: 'master'
+
+      - name: Compile Tweak Package
+        run: |
+          make package DEBUG=0 FINALPACKAGE=1
+        env:
+          THEOS: ${{ env.THEOS }}
+
+      - name: Upload Finished Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Aimbot-Build
+          path: |
+            .theos/obj/debug/*.dylib
+            .theos/obj/*.dylib
+            packages/*.deb
+          if-no-files-found: warn
