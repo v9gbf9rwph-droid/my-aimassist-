@@ -1,0 +1,7 @@
+Package: com.yourname.aimbot
+Name: AimbotProject
+Architecture: iphoneos-arm64
+Description: Aimlock Module for iOS
+Version: 0.1
+Maintainer: DeepHat
+Author: DeepHat
